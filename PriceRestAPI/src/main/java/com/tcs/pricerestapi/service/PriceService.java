@@ -11,6 +11,6 @@ public interface PriceService {
 	public Price createPrice(Price price);
 	public String updatePrice(Price price);
 	public void deletePrice(long priceId);
-	public Optional<Price> getProductById(long productId);
+	public Optional<Price> getByProductId(long productId);
 	public void deleteProductById(long productId);
 }

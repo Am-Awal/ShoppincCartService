@@ -37,6 +37,21 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired RestTemplate restTemplate;
 	
 	@Override
+	public Product updateProduct(Product product) {
+		Product product2 = null;
+		try {
+			product2 = productRepository.save(product);
+			
+			return product2;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	@Override
 	public Product createProduct(Product product) {
 		// TODO Auto-generated method stub			    	
 		
@@ -89,15 +104,17 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void deleteProduct(int id) {
 		// TODO Auto-generated method stub
-		productRepository.deleteById(id);
-		
+			
 		String idStr = Integer.toString(id);
 	     
-	    Map<String, String> params = new HashMap<String, String>();
-	    params.put("id", idStr);
+	   // Map<String, String> params = new HashMap<String, String>();
+	    //params.put("id", idStr);
 	     
-	    restTemplate.delete(PRICE_URL+"/delete/productid/{id}",  params );
-	    restTemplate.delete(STOCK_URL+"/delete/productid/{id}",  params );
+	    //restTemplate.delete(PRICE_URL+"/delete/productid/{id}",  params );
+		restTemplate.delete(PRICE_URL+"/delete/productid/"+idStr );
+	    //restTemplate.delete(STOCK_URL+"/delete/productid/{id}",  params );
+	    restTemplate.delete(STOCK_URL+"/delete/productid/"+idStr );
+	    productRepository.deleteById(id);
 	}
 
 	@Override

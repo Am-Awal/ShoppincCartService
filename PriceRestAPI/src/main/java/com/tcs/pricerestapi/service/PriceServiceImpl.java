@@ -48,15 +48,18 @@ public class PriceServiceImpl implements PriceService{
 	public void deletePrice(long priceId) {
 		priceServicerepository.deleteById(priceId);
 	}
-	
-	public Optional<Price> getProductById(long productId){
-		return priceServicerepository.findById(productId);
-	}
 
 
 	@Override
 	public void deleteProductById(long productId) {
 		// TODO Auto-generated method stub
 		priceServicerepository.deleteByProductId(productId);
+	}
+
+
+	@Override
+	public Optional<Price> getByProductId(long productId) {
+		// TODO Auto-generated method stub
+		return priceServicerepository.findByProductId(productId);
 	}
 }

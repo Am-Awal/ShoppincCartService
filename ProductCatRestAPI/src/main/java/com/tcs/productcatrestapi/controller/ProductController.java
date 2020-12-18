@@ -29,7 +29,7 @@ import com.tcs.productcatrestapi.service.ProductService;
 
 
 
-//@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/productcatalog")
 public class ProductController {
@@ -58,6 +58,7 @@ return productService.getProducts().get();
 
 	
 	@GetMapping("/category/{catName}")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Optional<List<Product>> 
 	getProductsByCategory(@PathVariable("catName")String catName) throws ProductIdNotFoundException {
 		return productService.getProductsByCategory(catName);
@@ -65,10 +66,10 @@ return productService.getProducts().get();
 	
 	
 	@PostMapping("/create")
-	//@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<?> createProduct(@RequestBody Product product,UriComponentsBuilder uriComponentsBuilder,HttpServletRequest request) {
 	
-		System.out.println("PRODUCT REQUEST: "+product.getDescription());
+		System.out.println("PRODUCT REQUEST: "+product.getExpiryDate());
 		Product product2 = productService.createProduct(product);
 		
 		UriComponents uriComponents = uriComponentsBuilder
@@ -84,7 +85,7 @@ return productService.getProducts().get();
 	//@PreAuthorize("hasRole('ADMIN')")
 	public Map<String, Boolean> deleteProductById(@PathVariable int id) throws ProductIdNotFoundException { 
 		Product product = productService.getProductById(id).orElseThrow(()-> new ProductIdNotFoundException("Product Id not found"));
-		
+		System.out.println("PRODUCTID:::::::::::"+id);
 		productService.deleteProduct(id);
 		HashMap<String, Boolean> hashMap = new HashMap<>();
 		hashMap.put("deleted", Boolean.TRUE);
@@ -100,7 +101,10 @@ return productService.getProducts().get();
 		Product product2 = productService.getProductById(id)
 				.orElseThrow(()-> new ProductIdNotFoundException("Product Id not found"));
 		product.setProductId(id);
-		Product product3 =productService.createProduct(product);
+		System.out.println("PRODUCT NAME!!!!!!!"+product.getProductName());
+		System.out.println("PRODUCT EXP_DATE!!!!!!!"+product.getExpiryDate());
+		
+		Product product3 =productService.updateProduct(product);
 		
 		return ResponseEntity.ok(product3);
 	}

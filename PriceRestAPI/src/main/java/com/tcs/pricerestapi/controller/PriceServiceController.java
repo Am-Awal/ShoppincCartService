@@ -34,12 +34,12 @@ public class PriceServiceController {
 	@Autowired
 	PriceService prices;
 	
-	@GetMapping("/id/{id}")
+	@GetMapping("/productid/{id}")
 	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Price> getByProductId(@PathVariable("id") long productId) 
 			throws ResourceNotFoundException {
 		
-		Price price = prices.getProductById(productId).orElseThrow(()-> new ResourceNotFoundException("Product not found"));
+		Price price = prices.getByProductId(productId).orElseThrow(()-> new ResourceNotFoundException("Product not found"));
 		return ResponseEntity.ok().body(price);
 	}
 	
@@ -73,12 +73,12 @@ public class PriceServiceController {
 	
 	@DeleteMapping("/delete/productid/{id}")
 	//@PreAuthorize("hasRole('ADMIN')")
-	public HashMap<String, Boolean> deletePriceByProductId(@PathVariable("id") long id) 
+	public HashMap<String, Boolean> deletePriceByProductId(@PathVariable long id) 
 			throws ResourceNotFoundException {
-		Price price3 = prices.getProductById(id).orElseThrow(()-> 
+		Price price3 = prices.getByProductId(id).orElseThrow(()-> 
 		new ResourceNotFoundException("Price not found"));
 		
-		prices.deleteProductById(id);
+		prices.deletePrice(price3.getPriceId());
 		HashMap<String, Boolean> hashMap = new HashMap<>();
 		hashMap.put("deleted", Boolean.TRUE);
 		

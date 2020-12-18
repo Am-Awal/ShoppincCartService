@@ -35,7 +35,7 @@ public class StockController {
 	@Autowired
 	StockService stockService;
 	
-	@GetMapping
+	@GetMapping("/getallstocks")
 	public List<Stock> getStocks(){
 		return stockService.getStocks().get();
 	}

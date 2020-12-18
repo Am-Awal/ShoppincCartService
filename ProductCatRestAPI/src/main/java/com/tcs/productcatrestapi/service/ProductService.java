@@ -9,6 +9,7 @@ import com.tcs.productcatrestapi.model.Product;
 public interface ProductService {
 	
 	public Product createProduct(Product product);
+	public Product updateProduct(Product product);
 	public Optional<Product> getProductById(int id);
 	public void deleteProduct(int id);
 	public Optional<java.util.List<Product>> getProducts();
