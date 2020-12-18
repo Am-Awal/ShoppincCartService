@@ -30,9 +30,9 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductRepository productRepository;
 	
-	private String PRICE_URL = "http://localhost:9080/api/price";
-	private String REVIEW_URL ="http://localhost:9070/api/review";
-	private String STOCK_URL = "http://localhost:9060/api/stock";
+	private String PRICE_URL = "http://172.31.65.217:9080/api/price";
+	private String REVIEW_URL ="http://172.31.65.217:9070/api/review";
+	private String STOCK_URL = "http://172.31.65.217:9060/api/stock";
 	
 	@Autowired RestTemplate restTemplate;
 	
