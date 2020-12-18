@@ -9,10 +9,10 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 //@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
 
-public class AuthDemoApplication {
+public class PriceRestApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AuthDemoApplication.class, args);
+		SpringApplication.run(PriceRestApiApplication.class, args);
 	}
 	
 	@Bean
