@@ -8,15 +8,15 @@ LABEL maintainer = "am.awal@outlook.com"
 VOLUME /tmp
 
 # Make PORT 9031 AVAILABLE TO THE OUTSIDE WORLD
-EXPOSE 9060
+EXPOSE 9070
 
 # application jar
-ARG JAR_FILE=target/StockRestAPI-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=target/ReviewRestAPI-0.0.1-SNAPSHOT.jar
 
 #add this JAR to the container
-ADD ${JAR_FILE} StockRestAPI.jar
+ADD ${JAR_FILE} ReviewRestAPI.jar
 
 #Run the jar file
-ENTRYPOINT [ "java", "-Djava.security.egd=file:/dev/./urandom","-jar","/StockRestAPI.jar" ]
+ENTRYPOINT [ "java", "-Djava.security.egd=file:/dev/./urandom","-jar","/ReviewRestAPI.jar" ]
 
 
