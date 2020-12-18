@@ -1,4 +1,4 @@
-package com.tcs.authproject;
+package com.tcs.productcatrestapi;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
